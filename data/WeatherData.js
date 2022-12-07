@@ -1,7 +1,7 @@
 import { LocalStorage as Cache } from '../helpers/Cache.js';
 
 // Weather API URL and API key
-const API_URL = 'http://api.openweathermap.org/data/2.5/weather';
+const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
 const API_KEY = (new URL(window.location.href)).searchParams.get("apikey");
 
 // Define the Weather class
