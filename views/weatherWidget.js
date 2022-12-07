@@ -9,7 +9,7 @@ export class WeatherWidget {
       // Bind the event handler methods
       this.onToggle = this.onToggle.bind(this);
 
-      // Get the DOM elements
+      // Get the DOM elements (We could potentially create them here instead for separation of concerns)
       this.loader = document.getElementById('loader');
       this.content = document.getElementById('content');
 

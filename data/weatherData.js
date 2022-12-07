@@ -1,4 +1,4 @@
-import { setData as cacheSet, getData as cacheGet } from '../helpers/cache.js';
+import { LocalStorage as Cache } from '../helpers/Cache.js';
 
 // Weather API URL and API key
 const API_URL = 'http://api.openweathermap.org/data/2.5/weather';
@@ -19,8 +19,10 @@ export class WeatherData {
 
   // Method to get the weather data from the API
   static async get(lat, lon) {
-    // Try to find the weather data in cache
-    let cachedData = cacheGet('localWeatherData', 30000);
+    // Try to find the weather data in cache (not older than 30 secons)
+    let cachedData = Cache.get('localWeatherData', 30000);
+
+    // If we can't find it, we fetch it from the API and cache it
     if (!cachedData) {
       // Make a GET request to the API
       const response = await fetch(`${API_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
@@ -28,11 +30,13 @@ export class WeatherData {
 
       // If we have an error, return an error string
       if (data.cod !== 200) {
-        return data.cod === 401 ? `Missing 'apikey' URL parameter.<br />Get one for free at <a href="https://openweathermap.org" target="_blank">openweathermap.org</a>.` : data.message;
+        throw new Error(
+          data.cod === 401 ? `Missing 'apikey' URL parameter.<br />Get one for free at <a href="https://openweathermap.org" target="_blank">openweathermap.org</a>.` : data.message
+        );
       }
 
       // Cache the data
-      cacheSet('localWeatherData', data);
+      Cache.set('localWeatherData', data);
       cachedData = data;
     }
 

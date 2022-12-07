@@ -1,16 +1,14 @@
-import { WeatherData } from './data/weatherData.js';
-import { WeatherWidget } from './views/weatherWidget.js';
+import { WeatherData } from './data/WeatherData.js';
+import { WeatherWidget } from './views/WeatherWidget.js';
 
 // Get the user's current location and create a new Weather data object
 navigator.geolocation.getCurrentPosition(async (position) => {
-  const weather = await WeatherData.get(position.coords.latitude, position.coords.longitude);
-
-  // If weather is a string it means we have an error
-  if (typeof weather === 'string') {
-    document.getElementById('weather').innerHTML = `<span class='error'>${weather}</span>`;
-    return;
+  try {
+    const weather = await WeatherData.get(position.coords.latitude, position.coords.longitude);
+    // Create a new WeatherView and render it to the page
+    const weatherView = new WeatherWidget(weather);
+    weatherView.render();
+  } catch (e) {
+    document.getElementById('weather').innerHTML = `<span class='error'>${e.message}</span>`;
   }
-  // Create a new WeatherView and render it to the page
-  const weatherView = new WeatherWidget(weather);
-  weatherView.render();
 });
