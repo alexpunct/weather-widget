@@ -1,5 +1,8 @@
 # Weather widget
 
+![image](https://user-images.githubusercontent.com/1785958/206202052-dfe77ed8-60df-4256-8693-4e01de6dfc53.png)
+
+
 Simple weather widget with HTML, Javascript and SCSS to display local weather conditions. 
 Uses data from https://openweathermap.org so make sure you get a free API key first.
 
