@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom right, #7F7FD5, #86A8E7, #91EAE4);
+  background: linear-gradient(to bottom right, #7f7fd5, #86a8e7, #91eae4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,12 +11,11 @@ body {
 }
 
 .weather {
-  background-color: white;
-  border-radius: 5px;
+  border-radius: 100%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  border: 5px solid linear-gradient(to bottom right, #7F7FD5, #86A8E7, #91EAE4);
   position: relative;
+  z-index: 1;
 }
 .weather:before {
   content: "";
@@ -30,11 +29,15 @@ body {
   /* !importanté */
   border-radius: inherit;
   /* !importanté */
-  background: linear-gradient(to right, #7F7FD5, #91EAE4);
+  background: linear-gradient(to right, #dddf5b, #dfc55b);
+  box-shadow: 0 0 50px 5px #dddf5b;
 }
 .weather .error {
   font-size: 0.8em;
   color: #900000;
+}
+.weather .loader {
+  padding: 111px 19px;
 }
 .weather .content {
   display: none;
@@ -52,6 +55,7 @@ body {
 }
 .weather .toggle {
   font-size: 0.8em;
+  font-weight: bold;
   cursor: pointer;
   margin-bottom: 20px;
 }
@@ -81,6 +85,84 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+#clouds {
+  position: absolute;
+  top: 200px;
+  left: 0;
+}
+
+.cloud {
+  width: 200px;
+  height: 60px;
+  background: #fff;
+  border-radius: 300px;
+  position: relative;
+}
+.cloud:before, .cloud:after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 100px;
+  height: 80px;
+  position: absolute;
+  top: -15px;
+  left: 10px;
+  border-radius: 100px;
+  transform: rotate(30deg);
+}
+.cloud:after {
+  width: 120px;
+  height: 120px;
+  top: -55px;
+  left: auto;
+  right: 15px;
+}
+
+.x1 {
+  animation: moveclouds 30s linear infinite;
+  opacity: 0.7;
+}
+
+.x2 {
+  left: 200px;
+  transform: scale(0.6);
+  opacity: 0.3;
+  animation: moveclouds 50s linear infinite;
+  opacity: 0.4;
+}
+
+.x3 {
+  left: -250px;
+  top: -200px;
+  transform: scale(0.8);
+  opacity: 0.4;
+  animation: moveclouds 60s linear infinite;
+}
+
+.x4 {
+  left: 470px;
+  top: -250px;
+  transform: scale(0.75);
+  opacity: 0.3;
+  animation: moveclouds 36s linear infinite;
+}
+
+.x5 {
+  left: -150px;
+  top: -150px;
+  transform: scale(0.8);
+  opacity: 0.4;
+  animation: moveclouds 40s linear infinite;
+}
+
+@keyframes moveclouds {
+  0% {
+    margin-left: 1000px;
+  }
+  100% {
+    margin-left: -1000px;
   }
 }
 

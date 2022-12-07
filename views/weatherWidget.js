@@ -28,6 +28,8 @@ export class WeatherWidget {
       // Method to update the weather view
   update() {
       this.cityEl.innerHTML = `${this.weather.city}, ${this.weather.country}`;
+
+      // @TODO add different class based on conditions to have different graphics
     
       if (this.toggle === "c") {
         this.tempEl.innerHTML = `${this.weather.getCelsius().toFixed(1)}&deg;C`;

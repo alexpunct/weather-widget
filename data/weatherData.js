@@ -1,3 +1,5 @@
+import { setData as cacheSet, getData as cacheGet } from '../helpers/cache.js';
+
 // Weather API URL and API key
 const API_URL = 'http://api.openweathermap.org/data/2.5/weather';
 const API_KEY = (new URL(window.location.href)).searchParams.get("apikey");
@@ -17,17 +19,25 @@ export class WeatherData {
 
   // Method to get the weather data from the API
   static async get(lat, lon) {
-    // Make a GET request to the API
-    const response = await fetch(`${API_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
-    const data = await response.json();
+    // Try to find the weather data in cache
+    let cachedData = cacheGet('localWeatherData', 30000);
+    if (!cachedData) {
+      // Make a GET request to the API
+      const response = await fetch(`${API_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+      const data = await response.json();
 
-    // If we have an error, return an error string
-    if (data.cod !== 200) {
-      return data.cod === 401 ? `Missing 'apikey' URL parameter.<br />Get one for free at <a href="https://openweathermap.org" target="_blank">openweathermap.org</a>.` : data.message;
+      // If we have an error, return an error string
+      if (data.cod !== 200) {
+        return data.cod === 401 ? `Missing 'apikey' URL parameter.<br />Get one for free at <a href="https://openweathermap.org" target="_blank">openweathermap.org</a>.` : data.message;
+      }
+
+      // Cache the data
+      cacheSet('localWeatherData', data);
+      cachedData = data;
     }
 
     // Return a new Weather object
-    return new WeatherData(data)
+    return new WeatherData(cachedData)
   }
 
   // Method to convert the temperature from Kelvin to Celsius
