@@ -10,7 +10,7 @@ Uses data from https://openweathermap.org so make sure you get a free API key fi
 
 Simply add the folder to the document root of your webserver and load the page in the browser by adding the `apikey` URL parameter with your openweathermap API key.
 
-Example: http://localhost:52330/index.html?apikey=123456
+Example: https://alexpunct.github.io/weather-widget/?apikey=123456
 
 ### Developers
 
