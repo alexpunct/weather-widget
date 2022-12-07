@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather Widget</title>
+    <link rel="stylesheet" href="styles/app.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="weather" class="weather">
+        <div id="loader" class="loader">
+          <span class="spinner spinner-slow"></span> Fetching weather data...
+        </div>
+        <div id="content" class="content">
+          <div id="city" class="city"></div>
+          <div id="temp" class="temp"></div>
+          <div id="toggle" class="toggle">°[c] -toggle- °[f]</div>
+          <div id="humidity" class="humidity"></div>
+          <div id="wind" class="wind"></div>
+          <div id="sunrise" class="sunrise"></div>
+          <div id="sunset" class="sunset"></div>
+        </div>
+      </div>
+    </div>
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
